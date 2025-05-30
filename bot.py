@@ -18,7 +18,7 @@ client = discord.Client(intents=intents)
 print("🧠 Discordクライアント作成完了")
 
 # ==== チャンネルIDを設定（数値にするのを忘れずに！） ====
-TARGET_CHANNEL_ID = int(os.getenv("TARGET_CHANNEL_ID", "0"))  # 例: 123456789012345678
+TARGET_CHANNEL_ID = int(os.getenv("TARGET_CHANNEL_ID", "1345725867107815434"))  # 例: 123456789012345678
 
 # ==== 月ごとのファイル名作成 ====
 def get_monthly_filename(prefix, extension, year=None, month=None):
