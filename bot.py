@@ -81,12 +81,19 @@ async def on_message(message):
                 return
         else:
             now = datetime.datetime.now()
-            docx_filename = get_monthly_filename("summary", "docx", now.year, now.month)
+            year, month = now.year, now.month
 
-        if os.path.exists(docx_filename):
-            await message.channel.send(f"📄 {docx_filename} を送信します：", file=discord.File(docx_filename))
+        # ✅ DOCXファイルを生成（なければ None）
+        docx_filename = convert_txt_to_docx(year, month)
+
+        if docx_filename and os.path.exists(docx_filename):
+            await message.channel.send(
+                f"📄 {os.path.basename(docx_filename)} を送信します：",
+                file=discord.File(docx_filename)
+            )
         else:
-            await message.channel.send(f"⚠️ ファイルが見つかりません: `{docx_filename}`")
+            await message.channel.send(
+                f"⚠️ ファイルが見つかりません: `summary_{year}_{month:02d}.docx`"
 
     else:
         save_message(message.author.display_name, content)
