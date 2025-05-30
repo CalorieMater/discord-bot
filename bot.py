@@ -75,7 +75,6 @@ async def on_message(message):
         if len(parts) == 2:
             try:
                 year, month = map(int, parts[1].split("-"))
-                docx_filename = get_monthly_filename("summary", "docx", year, month)
             except ValueError:
                 await message.channel.send("⚠️ コマンド形式が正しくありません！例: `!send-summary 2025-03`")
                 return
@@ -94,7 +93,7 @@ async def on_message(message):
         else:
             await message.channel.send(
                 f"⚠️ ファイルが見つかりません: `summary_{year}_{month:02d}.docx`"
-
+            )
     else:
         save_message(message.author.display_name, content)
         print(f"📝 保存: {message.author.display_name}: {content}")
